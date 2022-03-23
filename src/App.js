@@ -1,28 +1,28 @@
 import logo from "./logo.svg";
 import "./App.css";
-import writers from "./writers";
+
+import { useEffect, useState } from "react";
+
+import { ProfileCard } from "./ProfileCard";
 
 function App() {
-  // console.log(writers);
+  const [writers, setWriters] = useState([]);
+
+  useEffect(() => {
+    const getWriters = async () => {
+      const response = await fetch("./writers.json");
+      const data = await response.json();
+      setWriters(data);
+    };
+    getWriters();
+  }, []);
+
   return (
     <div>
-      <h1>WRITE PROFILES</h1>
-
+      <h1>Write Profiles</h1>
       <div className="container">
         {writers.map((writer) => (
-          <div className="card">
-            <img
-              src={`/images/${writer.avatar}.png`}
-              width="300px"
-              height="300px"
-              alt=""
-            />
-            <div className="textGroup">
-              <p>audre audre_lorde</p>
-              <p>audre@email.com</p>
-              <p>+233551234438</p>
-            </div>
-          </div>
+          <ProfileCard writer={writer} key={writer.id} />
         ))}
       </div>
     </div>

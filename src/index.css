@@ -4,10 +4,10 @@
 }
 
 body {
-  background-color: rebeccapurple;
+  background-color: darkcyan;
 }
 
-h1{
+h1 {
   text-align: center;
   margin: 20px;
   color: bisque;
@@ -20,6 +20,7 @@ h1{
   flex-wrap: wrap;
   max-width: 80%;
   margin: auto;
+  justify-content: space-between;
 }
 
 .card {
@@ -49,16 +50,29 @@ h1{
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 20px auto;
   max-width: 300px;
   background: coral;
-  box-shadow: 3px 2px 3px silver;
+  box-shadow: 3px 2px 3px rgba(0, 0, 0, 0.541);
   transition: all 0.3s ease-in-out;
+}
+
+.cardContent {
+  height: 300px;
+}
+
+.bioWrap {
+  color: whitesmoke;
+  margin: 15px;
+  text-align: justify;
 }
 
 .card:hover {
   transform: scale(1.03);
-  box-shadow: 5px 5px 10px whitesmoke;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.61);
 }
 
 .textGroup {
