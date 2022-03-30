@@ -1,41 +1,30 @@
-import logo from "./logo.svg";
-import "./App.css";
-//import writers from "./writers";
+import useLocalStorage from "./hooks/useLocalStorage";
+import ProfileForm from "./components/ProfileForm";
 import ProfileCard from "./components/ProfileCard";
-import { useEffect, useState } from "react";
-import ProfileForm from "./components/ProfileForm"
 
 function App() {
-  const [allProfile, setAllProfile] = useState([
-    {
-      firstName: "Hannah",
-      lastName: "Montana",
-      email: "hannah.montana@gmail.com",
-      phone: "+233 024 567 988"
-    }
-  ]);
+  const [profiles, setProfiles] = useLocalStorage("profiles", []);
 
-
-  const submit = (profile) => {
-    // const arr = allProfile
-    // arr.push(profile)
-    setAllProfile([...allProfile, profile ])
-  }
+  const updateProfiles = (profile) => {
+    let arr = profiles;
+    arr.push(profile);
+    setProfiles([...arr]);
+  };
 
   return (
-    <div>
-      <h1>Writer Profiles</h1>
-
-      <ProfileForm submit={submit}/>
-      <div className="container">        
-          {allProfile.map((writer) => (
-            <ProfileCard key={writer.id} writer={writer}/>
-          ))
-        }
+    <div className="app">
+      <h1> Profile Maker </h1>
+      <div>
+        <ProfileForm submit={updateProfiles} />
+        <hr />
+        <div className="list">
+          {profiles.map((person, index) => (
+            <ProfileCard key={index} card={person} />
+          ))}
+        </div>
       </div>
-      </div>
-    )
-  }
-
+    </div>
+  );
+}
 
 export default App;
