@@ -1,50 +1,60 @@
 import React, { useState } from 'react'
 
-const ProfileForm = ({submit}) => {
-    const [profile, setProfile] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-    })
+const Profileform = ({submit}) => {
+const [profile, setProfile] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+});
+const handleChange = (e) =>{
+    const {name, value} = e.target;
+    setProfile(prevState => ({...profile, [name]: value}))
+}
 
+const handleSubmit = (e) =>{
+e.preventDefault();
+submit (profile);
+setProfile({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+})
+}
 
-    const handleChange = (e) => {
-        const {name, value} = e.target
-        setProfile(prevState => ({...prevState, [name]: value}))
-    }
+  return (<form onSubmit={handleSubmit}>
+<fieldset>
+    <legend>Personal Information </legend>
+    <input type="text" 
+    name= "firstName"
+     onChange={handleChange} 
+     value={profile.firstName} 
+    />
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        submit(profile)
-    }
+    <input type="text" 
+    name=  "lastName" 
+    onChange={handleChange}
+     value={profile.lastName}
+     />
 
-  return (
-  <form onSubmit={handleSubmit}>
-      <fieldset>
-          <legend>Personal Information</legend>
-          <input type="text" 
-          name="firstName" 
-          onChange={handleChange} 
-          value={profile.firstName}/>
+    <input type="text"
+     name= "email"
+      onChange={handleChange} 
+      value={profile.email}
+     />
 
-          <input type="text"
-          name="lastName" 
-          onChange={handleChange}
-          value={profile.lastName}/>
+    <input type="text"
+     name= "phone"
+      onChange={handleChange} 
+     value={profile.phone}
+     />
+</fieldset>
+<button className='form'>Add writer</button>
+  </form>)
+    
 
-          <input type="email" 
-          name="email"
-          onChange={handleChange}
-          value={profile.email}/>
+  
+}
 
-          <input type="tel"
-          name="phone"
-          onChange={handleChange}
-          value={profile.phone}/>
-      </fieldset>
-      <button>Submit</button>
-  </form>
-  )}
-
-export default ProfileForm
+export default Profileform
